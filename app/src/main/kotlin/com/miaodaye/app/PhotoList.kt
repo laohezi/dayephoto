@@ -1,25 +1,19 @@
-package com.miao.daye.spring
+package com.miaodaye.app
 
-import jdk.jfr.DataAmount
-import lombok.Data
-import org.apache.juli.logging.Log
-import org.hibernate.annotations.Entity
+
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.domain.EntityScan
-import org.springframework.context.annotation.Bean
+import org.springframework.data.annotation.Id
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import java.io.File
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
-import javax.persistence.Id
 
-@javax.persistence.Entity
- class  Photo(){
+
+class  Photo(){
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +30,7 @@ class  PhotoData(){
 @RequestMapping("/photo")
 class PhotoListControoler(){
 
-    private lateinit var repository:PhotoListRepository
+    private lateinit var repository: PhotoListRepository
 
     @Autowired
     constructor(repository: PhotoListRepository) : this() {
@@ -52,14 +46,14 @@ class PhotoListControoler(){
 
 }
 
-interface  PhotoListRepository :JpaRepository<Photo,Long>{
+interface  PhotoListRepository : JpaRepository<Photo, Long> {
 
 }
 
 @Controller
 @RequestMapping("/photoScan")
 class PhotoListFileScanner(){
-    private lateinit var repository:PhotoListRepository
+    private lateinit var repository: PhotoListRepository
 
     @Autowired
     constructor(repository: PhotoListRepository) : this() {
@@ -87,12 +81,6 @@ class PhotoListFileScanner(){
 
 
 class  PhotoScanTask(){
-
-
-
-
-
-
 
 
 

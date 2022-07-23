@@ -5,3 +5,5 @@ pluginManagement {
     }
 }
 rootProject.name = "dayephoto"
+include("app")
+include("photolib")
