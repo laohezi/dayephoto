@@ -21,6 +21,8 @@ configurations {
 
 repositories {
     maven { url = uri("https://repo.spring.io/release") }
+    maven { url = uri("https://plugins.gradle.org/m2/") }
+
     mavenCentral()
 }
 
@@ -33,7 +35,9 @@ subprojects {
         plugin("io.spring.dependency-management")
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
+      //  plugin("com.palantir.docker")
       //  plugin("org.springframework.experimental.aot")
+
     }
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-web")
@@ -47,7 +51,14 @@ subprojects {
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         annotationProcessor("org.projectlombok:lombok")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
+       // kotlinCompilerClasspath("gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.20.0")
     }
+
+    apply {
+
+    }
+
+
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -58,5 +69,11 @@ subprojects {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
+
+
+
+
+
+
 
 }

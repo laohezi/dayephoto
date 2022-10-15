@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 import java.io.File
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -21,12 +22,9 @@ class  Photo(){
     lateinit var url:String
  }
 
-class  PhotoData(){
-    var id: Long = 0L
-    lateinit var url:String
-}
 
-@Controller
+
+@RestController
 @RequestMapping("/photo")
 class PhotoListControoler(){
 
@@ -38,7 +36,7 @@ class PhotoListControoler(){
         this.repository = repository
     }
 
-    @RequestMapping(method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = arrayOf("get") , method = arrayOf(RequestMethod.GET))
     fun scanPhoto(@RequestParam("dir")dir: String): MutableList<Photo> {
        val list= repository.findAll()
         return  list
@@ -47,6 +45,7 @@ class PhotoListControoler(){
 }
 
 interface  PhotoListRepository : JpaRepository<Photo, Long> {
+
 
 }
 
@@ -65,12 +64,12 @@ class PhotoListFileScanner(){
     fun scanPhoto(@RequestParam("dir")dir: String): List<out File> {
         val files = ArrayList<File>()
         dir?.let {
+
             val dir = File(dir)
             if (dir.exists() && dir.isDirectory) {
                 return dir.listFiles().toList().apply {
                     forEach {
                         println(it.absolutePath)
-
                     }
                 }
             }
